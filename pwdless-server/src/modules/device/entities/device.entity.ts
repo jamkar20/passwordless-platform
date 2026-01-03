@@ -1,26 +1,40 @@
-import {User} from "../../users/entities/users.entity";
-import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import { User } from '../../users/entities/users.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('devices')
 export class Device {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @ManyToOne(() => User, (s) => s.devices, {onDelete: "CASCADE"})
-    user: User;
+  @ManyToOne(() => User, (s) => s.devices, { onDelete: 'CASCADE' })
+  user: User;
 
-    @Column()
-    userAgent: string;
+  @Column()
+  userAgent: string;
 
-    @Column()
-    ip: string;
+  @Column({ nullable: true })
+  fingerprint?: string;
 
-    @Column({default: false})
-    trusted: boolean;
+  @Column()
+  ip: string;
 
-    @UpdateDateColumn()
-    lastSeen: Date;
+  @Column({ default: false })
+  trusted: boolean;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @UpdateDateColumn()
+  lastSeen: Date;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
