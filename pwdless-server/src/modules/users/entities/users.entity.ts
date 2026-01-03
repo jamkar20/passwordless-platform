@@ -25,7 +25,7 @@ export class User {
     email: string;
 
     @Column({nullable: true, select: false})
-    password: string;
+    password?: string;
 
     @Column({default: false})
     mfaEnabled: boolean;
@@ -34,10 +34,10 @@ export class User {
     role: UserRole;
 
     @Column({length: 64, nullable: true})
-    firstName: string;
+    firstName?: string;
 
     @Column({length: 128, nullable: true})
-    lastName: string;
+    lastName?: string;
 
     @OneToMany(() => WebAuthnCredential, (c) => c.user)
     credentials: WebAuthnCredential[];
